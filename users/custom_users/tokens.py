@@ -1,10 +1,10 @@
 from rest_framework_simplejwt.settings import api_settings
-from rest_framework_simplejwt.tokens import AccessToken
+from rest_framework_simplejwt import tokens
 
 from . import models
 
 
-class CustomAccessToken(AccessToken):
+class Token(tokens.Token):
 
     @classmethod
     def for_user(cls, user):
@@ -29,4 +29,13 @@ class CustomAccessToken(AccessToken):
 
         return token
 
-    _token_backend = None
+
+class AccessToken(Token):
+    token_type = "access"
+    lifetime = api_settings.ACCESS_TOKEN_LIFETIME
+
+
+class RefreshToken(Token):
+    token_type = "refresh"
+    lifetime = api_settings.REFRESH_TOKEN_LIFETIME
+

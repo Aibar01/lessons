@@ -140,3 +140,8 @@ SIMPLE_JWT = {
     "CUSTOMER_ID_CLAIM": "customer_id",
     "SELLER_ID_CLAIM": "seller_id",
 }
+
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    'custom_users.backend.CustomModelBackend',
+]
